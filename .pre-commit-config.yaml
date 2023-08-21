@@ -33,12 +33,16 @@ repos:
       - id: isort
         name: isort (python)
         args: ["--profile", "black", "--filter-files"]
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.4.1
+  - repo: local
     hooks:
       - id: mypy
-        # To avoid dependencies redefinition.
+        name: run mypy
         language: system
+        # entry should be the same you'd use to run mypy locally
+        entry: mypy gendiff --config-file pyproject.toml
+        pass_filenames: false # not needed, as mypy should be executed on the whole codebase
+        always_run: true
+        types: [python, pyi]
   - repo: https://github.com/pycqa/flake8
     rev: 6.1.0
     hooks:
