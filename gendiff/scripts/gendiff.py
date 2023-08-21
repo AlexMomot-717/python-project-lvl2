@@ -37,14 +37,14 @@ def generate_diff(first_file: str, second_file: str) -> str:
     output_str = "{\n"
     for b in sorted_list:
         if b in common_keys and f2[b] == f1[b]:
-            output_str += f"      {b}: {f2[b]})\n"
+            output_str += f"      {b}: {f2[b]}\n"
         elif b in common_keys and f2[b] != f1[b]:
-            output_str += f"    + {b}: {f2[b]})\n"
-            output_str += f"    - {b}: {f1[b]})\n"
+            output_str += f"    + {b}: {f2[b]}\n"
+            output_str += f"    - {b}: {f1[b]}\n"
         elif b in missing_keys:
-            output_str += f"    - {b}: {f1[b]})\n"
+            output_str += f"    - {b}: {f1[b]}\n"
         else:
-            output_str += f"    + {b}: {f2[b]})\n"
+            output_str += f"    + {b}: {f2[b]}\n"
     output_str += "}"
     return output_str.lower()
 
