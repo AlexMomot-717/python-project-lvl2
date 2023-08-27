@@ -8,4 +8,4 @@
 
 ### Demo
 
-[![asciicast](https://asciinema.org/a/602583.svg)](https://asciinema.org/a/602583)
+[![asciicast](https://asciinema.org/a/604893.svg)](https://asciinema.org/a/604893)
