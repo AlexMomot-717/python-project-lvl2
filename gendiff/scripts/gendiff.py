@@ -16,6 +16,7 @@ def get_args_parser() -> argparse.Namespace:
         "--format",
         type=str,
         help="set format of output",
+        default="stylish",
     )
     args = parser.parse_args()
     return args
@@ -23,7 +24,12 @@ def get_args_parser() -> argparse.Namespace:
 
 def main() -> None:
     args = get_args_parser()
-    diff = generate_diff(args.first_file, args.second_file)
+    if args.format == "stylish":
+        diff = generate_diff(args.first_file, args.second_file, output_format="stylish")
+    else:
+        diff = generate_diff(
+            args.first_file, args.second_file, output_format=""
+        )  # temporary stub
     print(diff)
 
 
