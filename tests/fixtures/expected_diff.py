@@ -7,8 +7,7 @@ EXPECTED_DIFF = """{
     + verbose: true
 }"""
 
-EXPECTED_DIFF_NESTED = """
-{
+EXPECTED_DIFF_NESTED = """{
     common: {
       + follow: false
         setting1: Value 1
@@ -21,7 +20,7 @@ EXPECTED_DIFF_NESTED = """
         }
         setting6: {
             doge: {
-              - wow:
+              - wow: 
               + wow: so much
             }
             key: value

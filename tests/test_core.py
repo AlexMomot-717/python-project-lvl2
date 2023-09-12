@@ -66,5 +66,4 @@ def test_generate_diff_nested() -> None:
     diff = generate_diff(file1, file2)
 
     # then
-
     assert diff == expected_diff

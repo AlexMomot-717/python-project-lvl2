@@ -51,9 +51,7 @@ def extruct_items(dict_obj: Dict[str, Any], depth: int) -> str:
     for key, val in dict_obj.items():
         if isinstance(val, dict):
             val = extruct_items(val, depth=depth + 1)
-        # items_str = f"{' ' * 4 * (depth)}{{\n"
-        items_str += f"{' ' * 4 * (depth)}{key}: {val}\n"
-    # items_str += f"{' ' * 4 * depth}}}\n"
+        items_str += f"{' ' * 4 * depth}{key}: {val}\n"
     return items_str
 
 
@@ -62,11 +60,14 @@ def formatted_items_str(depth: int, key: str, val: Any, special_char: str) -> st
     val = convert_value(val)
     if isinstance(val, dict):
         val = extruct_items(val, depth=depth + 1)
-        output_str += f"{' ' * 4 * depth}{special_char}{key}: {{\n"
-        output_str += f"{val}\n"
-        output_str += f"{' ' * 4 * depth}  }}\n"
+        output_str += f"{' ' * 3 * depth}{special_char}{key}: {{\n"
+        output_str += f"{val}"
+        output_str += f"{' ' * 3 * depth}  }}\n"
     else:
-        output_str += f"{' ' * 4 * depth}{special_char}{key}: {val}\n"
+        if depth != 1:
+            output_str += f"{' ' * 3 * depth}{special_char}{key}: {val}\n"
+        else:
+            output_str += f"{' ' * 2 * depth}{special_char}{key}: {val}\n"
     return output_str
 
 
@@ -76,7 +77,7 @@ def get_diff_str(
     dict2: Dict[str, Any],
     depth: int = 1,
 ) -> str:
-    output_str = ""
+    output_str = "{\n"
     for key in diff_view.keys():
         if diff_view[key] == "equal":
             special_char = "  "
@@ -101,7 +102,7 @@ def get_diff_str(
             depth=depth, key=key, val=val, special_char=special_char
         )
 
-    return output_str
+    return output_str + ("}" if depth == 1 else "  " * (depth + 1) + "}")
 
 
 def generate_diff(
@@ -111,7 +112,7 @@ def generate_diff(
     f2 = parse_file(second_file)
     diff_view = get_diff_view(f1, f2)
     if output_format == "stylish":
-        diff_output = f"{{\n{get_diff_str(diff_view, f1, f2)}}}"
+        diff_output = get_diff_str(diff_view, f1, f2)
     else:
         diff_output = ""
     return diff_output
