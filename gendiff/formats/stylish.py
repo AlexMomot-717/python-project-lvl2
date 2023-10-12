@@ -3,9 +3,9 @@ from typing import Any, Dict
 from gendiff.diff import get_diff_view
 
 diffs_templates = {
-    "missing": "{indent}- {key}:{space}{value}\n",
-    "added": "{indent}+ {key}:{space}{value}\n",
-    "no_change": "{indent}  {key}:{space}{value}\n",
+    "missing": "{indent}- {key}: {value}\n",
+    "added": "{indent}+ {key}: {value}\n",
+    "no_change": "{indent}  {key}: {value}\n",
     "nested": "{indent}  {key}: {{\n{value}{indent}  }}\n",
     "missing_nested": "{indent}- {key}: {{\n{value}{indent}  }}\n",
     "added_nested": "{indent}+ {key}: {{\n{value}{indent}  }}\n",
@@ -13,15 +13,16 @@ diffs_templates = {
 
 
 def convert_value(val: Any) -> Any:
+    if type(val) is int and val == 0:
+        return "0"
     exceptions_to_convert = {False: "false", True: "true", None: "null"}
     return exceptions_to_convert.get(val, val) if not isinstance(val, dict) else val
 
 
 def plain_diff(key_type: str, indent: int, key: str, value: Any) -> str:
     value = convert_value(value)
-    space = "" if value == "" else " "
     plain_diff_str = diffs_templates[key_type].format(
-        indent=indent * " ", key=key, space=space, value=value
+        indent=indent * " ", key=key, value=value
     )
 
     return plain_diff_str

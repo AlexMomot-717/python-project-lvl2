@@ -1,4 +1,5 @@
 from gendiff.file_operations import parse_file
+from gendiff.formats.json_format import get_diff_json_str
 from gendiff.formats.plain import decorate_plain_diff
 from gendiff.formats.stylish import get_diff_str_nested
 
@@ -10,4 +11,6 @@ def generate_diff(
     f2 = parse_file(second_file)
     if format_name == "plain":
         return decorate_plain_diff(f1, f2)
+    elif format_name == "json":
+        return get_diff_json_str(f1, f2)
     return get_diff_str_nested(f1, f2)

@@ -53,7 +53,7 @@ def get_diff_view(dict1: Dict[str, Any], dict2: Dict[str, Any]) -> Dict[str, Any
         elif key_type == "nested":
             value = get_diff_view(dict1[key], dict2[key])
         elif key_type == "changed_nested":
-            if isinstance(dict1, dict):
+            if isinstance(dict1[key], dict):
                 value = get_diff_view(dict1[key], dict1[key])
                 changed_value = dict2[key]
             else:
