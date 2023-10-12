@@ -17,7 +17,7 @@ def get_args_parser() -> argparse.Namespace:
         type=str,
         help="set format of output",
         default="stylish",
-        choices=("stylish", "plain"),
+        choices=("stylish", "plain", "json"),
     )
     args = parser.parse_args()
     return args

@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hexlet-code"
-version = "0.7.0"
-description = "simple tool for differences generating"
+version = "0.8.0"
+description = "a tool for files difference generating"
 authors = ["alexandra <momotav717@gmail.com>"]
 readme = "README.md"
 packages = [{include = "gendiff"}]
@@ -43,7 +43,7 @@ isort-show-traceback = true
 ignore = "Q000"
 
 # it is possibble to have prints in scripts
-per-file-ignores = "gendiff/scripts/*.py: WPS421"
+per-file-ignores = ["gendiff/scripts/*.py: WPS421", "tests/fixtures/expected_diff_nested.txt: W291"]
 
 [tool.pytest]
 norecursedirs = "__pycache__"
