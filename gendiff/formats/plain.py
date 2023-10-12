@@ -10,6 +10,8 @@ plain_templates = {
 
 
 def convert_value_plain_format(val: Any) -> Any:
+    if type(val) is int and val == 0:
+        return "0"
     exceptions_to_convert: Dict[bool | None, str] = {
         False: "false",
         True: "true",
