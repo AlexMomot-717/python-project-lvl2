@@ -28,23 +28,6 @@ gitlint = "^0.19.1"
 mypy = "^1.4.1"
 types-pyyaml = "^6.0.12.11"
 
-[tool.flake8]
-accept-encodings = "utf-8"
-max-complexity = 10
-statistics = false
-# black compatibility
-max-line-length = 88
-extend-ignore = "E203"
-doctests = true
-enable-extensions = "G"
-isort-show-traceback = true
-
-# black loves the double quotes
-ignore = "Q000"
-
-# it is possibble to have prints in scripts
-per-file-ignores = ["gendiff/scripts/*.py: WPS421", "tests/fixtures/expected_diff_nested.txt: W291"]
-
 [tool.pytest]
 norecursedirs = "__pycache__"
 addopts = "--strict-markers"
