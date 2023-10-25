@@ -1,3 +1,4 @@
+from json import dumps
 from typing import Any, Dict
 
 from gendiff.diff import get_diff_view
@@ -13,10 +14,7 @@ diffs_templates = {
 
 
 def convert_value(val: Any) -> Any:
-    if type(val) is int and val == 0:
-        return "0"
-    exceptions_to_convert = {False: "false", True: "true", None: "null"}
-    return exceptions_to_convert.get(val, val) if not isinstance(val, dict) else val
+    return dumps(val).replace('"', "")
 
 
 def plain_diff(key_type: str, indent: int, key: str, value: Any) -> str:
