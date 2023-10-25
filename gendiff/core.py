@@ -1,5 +1,5 @@
 from gendiff.file_operations import parse_file
-from gendiff.formats.json_format import get_diff_json_str
+from gendiff.formats.json import get_diff_json_str
 from gendiff.formats.plain import decorate_plain_diff
 from gendiff.formats.stylish import get_diff_str_nested
 
