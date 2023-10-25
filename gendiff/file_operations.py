@@ -5,18 +5,18 @@ import yaml
 from yaml.loader import SafeLoader
 
 
-def get_file_format(file_name: str) -> str:
+def get_file_extension(file_name: str) -> str:
     if file_name.endswith(".json"):
-        extention = "json"
+        extension = "json"
     elif file_name.endswith(".yaml") or file_name.endswith(".yml"):
-        extention = "yaml"
+        extension = "yaml"
     else:
         raise Exception("Unsupported file format!")
-    return extention
+    return extension
 
 
 def parse_file(file_name: str) -> Dict[str, Any]:
-    extension = get_file_format(file_name)
+    extension = get_file_extension(file_name)
     with open(file_name, "r") as f:
         if extension == "json":
             result = dict(json.load(f))
